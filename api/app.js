@@ -67,11 +67,9 @@ app.post("/auth/google", async (req, res) => {
           user = await User.create(newUser)
           console.log("Creating a new user in the db")
       }
-
     } catch (err) {
       console.error(err)
     }
-
     res.sendStatus(200)
 })
 
