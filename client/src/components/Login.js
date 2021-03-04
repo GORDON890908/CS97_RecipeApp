@@ -17,10 +17,11 @@ function Login() {
       }
     }).then(res => {
       if (res.ok) {
-        console.log("Google signin success")
+        localStorage.setItem('googleId', googleData.googleId);
+        console.log("Google signin success");
         history.push("/dashboard");
       } else {
-        console.log("Google signin fail")
+        console.log("Google signin fail");
       }
     })
   };
