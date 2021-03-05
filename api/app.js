@@ -9,6 +9,7 @@ const connectDB = require('./config/db')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const User = require('./models/User')
+const Recipe = require('./models/Recipe')
 
 // Load config
 dotenv.config({ path: './config/config.env' })
@@ -71,6 +72,17 @@ app.post("/auth/google", async (req, res) => {
       console.error(err)
     }
     res.sendStatus(200)
+})
+
+app.post("/dashboard", async (req, res) => {
+  try{
+    Recipe.create(req.body)
+      .then(data => {
+        res.json(data);
+      })
+  }catch(err){
+    console.error(err);
+  }
 })
 
 const PORT = process.env.PORT || 9000
