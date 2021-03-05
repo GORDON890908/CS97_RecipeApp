@@ -79,6 +79,7 @@ app.post("/dashboard", async (req, res) => {
     Recipe.create(req.body)
       .then(data => {
         res.json(data);
+        console.log("Recipe Successfully Posted");
       })
   }catch(err){
     console.error(err);
