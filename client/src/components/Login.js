@@ -17,10 +17,12 @@ function Login() {
       }
     }).then(res => {
       if (res.ok) {
+        // Clear localStorage and set localStorage
         localStorage.clear();
         localStorage.setItem('googleId', googleData.profileObj.googleId);
         localStorage.setItem('name', googleData.profileObj.name);
         localStorage.setItem('email', googleData.profileObj.email);
+        localStorage.setItem('exp', googleData.tokenObj.expires_at);
         console.log("Google signin success");
         history.push("/dashboard");
       } else {
