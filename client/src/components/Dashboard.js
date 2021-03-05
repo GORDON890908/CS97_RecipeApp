@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Upload from './Upload.js';
 
 // The Header creates links that can be used to navigate
 // between routes.
@@ -13,6 +14,7 @@ function Dashboard() {
             <p> {googleId} </p>
             <p> {name} </p>
             <p> {email} </p>
+            <Upload/>
         </div>
     )
 }
