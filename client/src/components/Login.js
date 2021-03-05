@@ -17,7 +17,10 @@ function Login() {
       }
     }).then(res => {
       if (res.ok) {
-        localStorage.setItem('googleId', googleData.googleId);
+        localStorage.clear();
+        localStorage.setItem('googleId', googleData.profileObj.googleId);
+        localStorage.setItem('name', googleData.profileObj.name);
+        localStorage.setItem('email', googleData.profileObj.email);
         console.log("Google signin success");
         history.push("/dashboard");
       } else {
