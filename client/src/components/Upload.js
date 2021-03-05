@@ -17,19 +17,23 @@ const Upload = () => {
     }
 
     const createRecipe = async (info) => {
+      try{
         await fetch("/dashboard", {
-            method: "POST",
-            body: JSON.stringify(info),
-            headers: {
-              "Content-Type": "application/json",
-            }
-            }).then(res => {
-            if (res.ok) {
-              history.push("/dashboard");
-            } else {
-              console.log("Post Recipe fail");
-            }
-            })
+          method: "POST",
+          body: JSON.stringify(info),
+          headers: {
+            "Content-Type": "application/json",
+          }
+          }).then(res => {
+          if (res.ok) {
+            history.push("/dashboard");
+            console.log("Frond-End Post Recipe Success")
+          }
+        })
+      }
+      catch(err){
+        console.log("Front-End Post Recipe Fail");
+      }
     };
     
     return(
