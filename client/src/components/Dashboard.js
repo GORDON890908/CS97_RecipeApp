@@ -6,11 +6,15 @@ import {useHistory} from "react-router-dom";
 // between routes.
 function Dashboard() {
     const history = useHistory();
-  
+
     // Use getItem to get the value stored in localStorage
     const googleId = localStorage.getItem('googleId');
-    const name = localStorage.getItem('name');
-    const email = localStorage.getItem('email');
+    
+    const fetchUser = async() => {
+        await fetch(`/user?googleId=${googleId}`)
+        .then(res => res.json())
+        .then(data => console.log(data));
+    }
     
     function logout() {
         localStorage.clear();
@@ -20,9 +24,10 @@ function Dashboard() {
     return (
         <div>
             <p> {googleId} </p>
-            <p> {name} </p>
-            <p> {email} </p>
             <Upload/>
+            <button onClick={fetchUser}>
+                Fetch
+            </button>
             <button onClick={logout}>
                 Log Out
             </button>
