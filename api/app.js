@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo')(session)
 const connectDB = require('./config/db')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const querystring = require('querystring')
 const User = require('./models/User')
 const Recipe = require('./models/Recipe')
 
@@ -72,6 +73,19 @@ app.post("/auth/google", async (req, res) => {
       console.error(err)
     }
     res.sendStatus(200)
+})
+
+// @desc    Query User database and return the user info
+// @route   GET /user
+app.get("/user", (req, res) => {
+  const url = querystring.parse(req.url);
+  const query = url['/user?googleId'];
+  
+  User.find({ googleId: `${query}` }).then((user) => {
+    res.send(user);
+  }).catch((err) => {
+    res.status(500).send(err);
+  })
 })
 
 app.post("/dashboard", async (req, res) => {
