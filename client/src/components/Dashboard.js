@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import Upload from './Upload.js';
@@ -8,13 +8,17 @@ import Upload from './Upload.js';
 function Dashboard() {
     const history = useHistory();
 
+    // Update user after query
+    const [user, setUser] = useState(null);
     // Use getItem to get the value stored in localStorage
     const googleId = localStorage.getItem('googleId');
     
     const fetchUser = async() => {
         await fetch(`/user?googleId=${googleId}`)
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => {
+            setUser(data);
+        });
     }
     
     function logout() {
@@ -24,7 +28,16 @@ function Dashboard() {
 
     return (
         <div>
-            <p> {googleId} </p>
+            <div>
+                {user && user.map((user, index) => {
+                    return (
+                        <div key = {index}>
+                            <p>Welcome {user.displayName}</p>
+                            <p>googleId: {user.googleId}</p>
+                        </div>
+                    )
+                })}
+            </div>
             <Upload/>
             <button onClick={fetchUser}>
                 Fetch
