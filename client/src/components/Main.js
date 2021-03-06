@@ -16,7 +16,7 @@ const checkAuth = () => {
       return false;
     }
 
-  } catch (e) {
+  } catch(err) {
     return false;
   }
   return true;

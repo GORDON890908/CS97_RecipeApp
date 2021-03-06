@@ -1,6 +1,7 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
+
 import Upload from './Upload.js';
-import {useHistory} from "react-router-dom";
 
 // The Header creates links that can be used to navigate
 // between routes.

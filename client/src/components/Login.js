@@ -1,12 +1,11 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const history = useHistory();
   
   const responseSuccessGoogle = async (googleData) => {
-    console.log(googleData.tokenId);
     await fetch("/auth/google", {
       method: "POST",
       body: JSON.stringify({ 
