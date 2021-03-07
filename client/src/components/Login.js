@@ -36,7 +36,9 @@ function Login() {
 
   return (
     <div>
-      <div className="col-md-6 offset-md-3 text-center">
+      <div className="text-center">
+        <h1>Welcome to the Recipe App</h1>
+        <p>Please login first to enter the website</p>
         <GoogleLogin
           clientId="281834657367-r6h4r3t5unmp2q9rl9usg3gp9k23iq3b.apps.googleusercontent.com"
           buttonText="Login With Google"
