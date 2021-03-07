@@ -135,14 +135,13 @@ export default function Dashboard() {
   const [openPopup, setOpenPopup] = React.useState(false)
 
   const history = useHistory();
-  // Update user after query
-  const [recipe, setRecipe] = React.useState([]);
-  // Use getItem to get the value stored in localStorage  
+  const [recipes, setRecipes] = React.useState([]);
+   
   const fetchRecipe = async() => {
       await fetch('/recipe')
       .then(res => res.json())
       .then(data => {
-          setRecipe(data);
+          setRecipes(data);
       });
   }
   
@@ -187,7 +186,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Welcome, {localStorage.getItem('name')}
           </Typography>
           <Button color = "inherit" 
           onClick={() =>setOpenPopup(true)}>
@@ -195,9 +194,9 @@ export default function Dashboard() {
             <AddIcon/>
           </Button>
           <Popup
-          title = "Recipe Form"
-          openPopup = {openPopup}
-          setOpenPopup = {setOpenPopup}
+            title = "Recipe Form"
+            openPopup = {openPopup}
+            setOpenPopup = {setOpenPopup}
           >
             <RecipeForm />
           </Popup>
@@ -227,7 +226,7 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} /> 
         <Container maxWidth="lg" className={classes.container}>
-          <IngredientResults ingredientsArray = {ingredientsArray} recipeList = {recipe}/>
+          <IngredientResults ingredientsArray = {ingredientsArray} recipeList = {recipes}/>
           {/* <Box pt={4}>
             <Copyright />
           </Box> */}

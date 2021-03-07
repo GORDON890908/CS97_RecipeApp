@@ -17,6 +17,12 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckboxList(props) {
   const classes = useStyles();
 
-
-   useEffect(()=> {
+  useEffect(()=> {
     console.log("value of props changed: ", props.checkArray)
   }, [props.checkArray])
 
@@ -154,18 +159,33 @@ export class IngredientResults extends React.Component{
     })
   }
 
+  // TODO: Need to add the stylesheet to the card
+  // https://material-ui.com/components/cards/ for more info
   renderRecipes(){
     return this.props.recipeList.map((recipe, i) => {
+      const date = recipe.createdAt;
       return (
-        <ListItem key = {i}>
-          {recipe.recipeName}
-        </ListItem>
+        <div key = {i}>
+          <Card>
+            <CardHeader
+              title={recipe.recipeName}
+              subheader={date.substring(0,10)}
+            />
+            <CardContent>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {recipe.description}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Learn More</Button>
+            </CardActions>
+          </Card>
+        </div>
       )
     })
   }
 
   render(){
-    const {classes}=this.props;
     return(
       <div>
       <List
