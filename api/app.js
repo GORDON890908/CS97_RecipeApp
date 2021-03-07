@@ -108,7 +108,7 @@ app.get("/recipe", (req, res) => {
   try{
     Recipe.find({}).then((results => {
       res.send(results);
-      console.log(results);
+      //console.log(results);
     }))
   }catch(err){
     console.error(err)
