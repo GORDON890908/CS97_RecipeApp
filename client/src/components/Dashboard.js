@@ -154,9 +154,11 @@ export default function Dashboard() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+  
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
   const handleCheckClick = (value, array) => () =>{
     const ingredients = ingredientsArray
     console.log(ingredients)
@@ -221,7 +223,7 @@ export default function Dashboard() {
         </div>
         <Divider />
         <SelectedList ingredientsArray = {ingredientsArray}
-         handleCheckClick = {handleCheckClick} />
+          handleCheckClick = {handleCheckClick} />
         <Divider />
       </Drawer>
       <main className={classes.content}>
