@@ -43,8 +43,8 @@ class IngredientResults extends React.Component{
         const { classes } = this.props;
         return this.props.recipeList.map((recipe, i) => {
         const date = recipe.createdAt;
-            return (
-                <div key = {i}>
+        return (
+            <div key = {i}>
                 <Card className={classes.root}>
                 <CardHeader
                     title={recipe.recipeName}
@@ -62,8 +62,8 @@ class IngredientResults extends React.Component{
                     <Button size="small">Learn More</Button>
                 </CardActions>
                 </Card>
-            </div>)
-      })
+            </div>
+        )})
     }
   
     render(){
