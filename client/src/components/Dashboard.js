@@ -15,7 +15,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { SelectedList, IngredientResults } from './listItems';
+import { SelectedList } from './listItems';
+import IngredientResults from './Cards';
 import Paper from '@material-ui/core/Paper'
 import AddIcon from '@material-ui/icons/Add';
 
@@ -226,10 +227,7 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} /> 
         <Container maxWidth="lg" className={classes.container}>
-          <IngredientResults ingredientsArray = {ingredientsArray} recipeList = {recipes}/>
-          {/* <Box pt={4}>
-            <Copyright />
-          </Box> */}
+          <IngredientResults recipeList = {recipes}/>
         </Container>
       </main>
     </div>
