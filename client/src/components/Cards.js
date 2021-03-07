@@ -1,5 +1,4 @@
 import React from 'react';
-import { FlatList } from 'react-native';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -56,8 +55,7 @@ class IngredientResults extends React.Component{
                             <Card>
                                 <CardHeader
                                     title={recipe.recipeName}
-                                    //subheader={date.substring(0,10)}
-                                    subheader={recipe.createdAt}
+                                    subheader={(recipe.createdAt).substring(0, 10)}
                                 />
                                 <CardContent>
                                     <Typography variant="body2" color="textSecondary" component="p">
@@ -86,11 +84,11 @@ class IngredientResults extends React.Component{
             aria-labelledby="nested-list-subheader"
             subheader={
                 <ListSubheader component="div" id="nested-list-subheader">
-                Recipes
+                    Recipes
                 </ListSubheader>
             }
             >
-            {this.renderRecipes()}
+                {this.renderRecipes()}
             </List>
             </div>
         )
