@@ -10,10 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = theme => ({
     root: {
-        maxWidth: 500,
+        maxWidth: 'max',
     },
 });
 
@@ -41,29 +42,40 @@ class IngredientResults extends React.Component{
 
     renderRecipes(){
         const { classes } = this.props;
-        return this.props.recipeList.map((recipe, i) => {
-        const date = recipe.createdAt;
         return (
-            <div key = {i}>
-                <Card className={classes.root}>
-                <CardHeader
-                    title={recipe.recipeName}
-                    subheader={date.substring(0,10)}
-                />
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    {recipe.description}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    {recipe._id}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-                </Card>
+            <div className={classes.root}>
+                <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="flex-start"
+                >
+                    {this.props.recipeList.map((recipe, i) => (
+                        <Grid item xs={12} sm={6} key={i}>
+                            <Card>
+                                <CardHeader
+                                    title={recipe.recipeName}
+                                    //subheader={date.substring(0,10)}
+                                    subheader={recipe.createdAt}
+                                />
+                                <CardContent>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        {recipe.description}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        {recipe._id}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button size="small">Learn More</Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
             </div>
-        )})
+        )
     }
   
     render(){
