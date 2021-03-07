@@ -233,6 +233,9 @@ export default function Dashboard() {
             <Copyright />
           </Box> */}
         </Container>
+        <button onClick={logout}>
+                Log Out
+        </button>
       </main>
     </div>
   );
