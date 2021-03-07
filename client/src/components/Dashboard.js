@@ -14,7 +14,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { SelectedList, IngredientResults } from './listItems';
 import Paper from '@material-ui/core/Paper'
 import AddIcon from '@material-ui/icons/Add';
@@ -189,11 +189,6 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <Button color = "inherit" 
           onClick={() =>setOpenPopup(true)}>
             Add User Input Form
@@ -206,6 +201,10 @@ export default function Dashboard() {
           >
             <RecipeForm />
           </Popup>
+          <IconButton color="inherit" onClick={() => logout()}>
+            <ExitToAppIcon />
+            Logout
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
