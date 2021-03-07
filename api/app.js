@@ -5,10 +5,13 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
-const connectDB = require('./config/db')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const querystring = require('querystring')
+
+const connectDB = require('./config/db')
 const User = require('./models/User')
+const Recipe = require('./models/Recipe')
 
 // Load config
 dotenv.config({ path: './config/config.env' })
@@ -41,6 +44,8 @@ app.use(
 )
 
 // Routing
+
+// Authentication/User
 const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 
@@ -73,6 +78,45 @@ app.post("/auth/google", async (req, res) => {
     res.sendStatus(200)
 })
 
+// @desc    Query User database and return the user info
+// @route   GET /user
+app.get("/user", (req, res) => {
+  const url = querystring.parse(req.url);
+  const googleId = url['/user?googleId'];
+  
+  User.find({ googleId: `${googleId}` }).then((user) => {
+    res.send(user);
+  }).catch((err) => {
+    res.status(500).send(err);
+  })
+})
+
+// Recipe
+app.post("/dashboard", async (req, res) => {
+  try{
+    Recipe.create(req.body)
+      .then(data => {
+        res.json(data);
+        console.log("Recipe Successfully Posted");
+      })
+  }catch(err){
+    console.error(err);
+  }
+})
+
+app.get("/recipe", (req, res) => {
+  try{
+    Recipe.find({}).then((results => {
+      res.send(results);
+      console.log(results);
+    }))
+  }catch(err){
+    console.error(err)
+  }
+
+})
+
+// PORTS
 const PORT = process.env.PORT || 9000
 
 app.listen(
