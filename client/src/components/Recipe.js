@@ -17,15 +17,19 @@ function Recipe() {
             <h1>Recipe page</h1>
             <div>
                 {recipe && recipe.map((recipe, index) => {
+                    console.log(recipe)
                     return (
                         <div key = {index}>
-                            <p>Recipe {recipe.recipeName}</p>
+                            <p>Recipe Name: {recipe.recipeName}</p>
                             <p>Description: {recipe.description}</p>
                         </div>
                     )
                 })}
             </div>
             <button onClick={fetchRecipe}> fetch </button>
+            <div>
+                Commecting
+            </div>
         </div>
         </div>
     );
