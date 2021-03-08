@@ -106,7 +106,7 @@ app.post("/dashboard", async (req, res) => {
 
 app.get("/recipe", (req, res) => {
   try{
-    Recipe.find({}).then((results => {
+    Recipe.find({}).sort({ _id: -1 }).then((results => {
       res.send(results);
       //console.log(results);
     }))
