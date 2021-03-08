@@ -2,8 +2,10 @@ import { Switch, Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import ReactDom from 'react-dom';
 import RecipeDetail from './RecipeDetail.js'
 
-import React from 'react';
-import Search_bar from './search-bar.js';
+
+import Main from './Main'
+
+
 
 //import content from 'content.js';
 

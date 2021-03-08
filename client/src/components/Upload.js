@@ -9,10 +9,8 @@ const Upload = () => {
         description:"Japanese Meat and Potato Stew!!",
         ingredients:["potatoes","onions","carrots","chuck steak"],
         procedures:["chop everything", "blanch meat", "add everything and boil"],
-        notes:"remember to blanch",
         reviews:["00123", "32131"],
         userName:"Oscar Cheng",
-        tags:["Japanese", "Stew"],
         createdAt: Date.now,
     }
 
@@ -38,7 +36,7 @@ const Upload = () => {
     
     return(
         <div>
-            <button onClick = {e => createRecipe(recipe)}>Recipe</button>
+            <button onClick = {() => createRecipe(recipe)}>Recipe</button>
         </div>
     )
 }

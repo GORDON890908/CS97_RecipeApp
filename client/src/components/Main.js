@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Login from './Login'
 import Dashboard from './Dashboard'
+import Recipe from './Recipe'
 
 // Protected Route 
 const checkAuth = () => {
@@ -35,8 +36,9 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path='/login' render={props => <Login {...props} />}/>
+      <Route exact path='/login' component={Login}/>
       <AuthRoute exact path='/dashboard' component={Dashboard} />
+      <AuthRoute exact path='/recipe/' component={Recipe} />
       <AuthRoute exact path="/" component={Dashboard} />
       <Route path="*" component={() => "404 NOT FOUND"}/>
     </Switch>

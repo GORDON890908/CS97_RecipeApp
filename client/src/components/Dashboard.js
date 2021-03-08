@@ -14,8 +14,9 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { SelectedList, IngredientResults } from './listItems';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { SelectedList } from './listItems';
+import IngredientResults from './Cards';
 import Paper from '@material-ui/core/Paper'
 import AddIcon from '@material-ui/icons/Add';
 
@@ -135,16 +136,36 @@ export default function Dashboard() {
   const [openPopup, setOpenPopup] = React.useState(false)
 
   const history = useHistory();
-  // Update user after query
-  const [recipe, setRecipe] = React.useState([]);
-  // Use getItem to get the value stored in localStorage  
+  const [recipes, setRecipes] = React.useState([]);
+   
   const fetchRecipe = async() => {
       await fetch('/recipe')
       .then(res => res.json())
       .then(data => {
-          setRecipe(data);
+          setRecipes(data);
       });
   }
+
+  const createRecipe = async (info) => {
+    try{
+      await fetch("/dashboard", {
+        method: "POST",
+        body: JSON.stringify(info),
+        headers: {
+          "Content-Type": "application/json",
+        }
+        }).then(res => {
+        if (res.ok) {
+          console.log("Frond-End Post Recipe Success")
+          setOpenPopup(false);
+          fetchRecipe();
+        }
+      })
+    }
+    catch(err){
+      console.log("Front-End Post Recipe Fail");
+    }
+  };
   
   const logout = () => {
       localStorage.clear();
@@ -154,9 +175,11 @@ export default function Dashboard() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+  
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
   const handleCheckClick = (value, array) => () =>{
     const ingredients = ingredientsArray
     console.log(ingredients)
@@ -187,25 +210,24 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Welcome, {localStorage.getItem('name')}
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <Button color = "inherit" 
           onClick={() =>setOpenPopup(true)}>
             Add User Input Form
             <AddIcon/>
           </Button>
           <Popup
-          title = "Recipe Form"
-          openPopup = {openPopup}
-          setOpenPopup = {setOpenPopup}
+            title = "Recipe Form"
+            openPopup = {openPopup}
+            setOpenPopup = {setOpenPopup}
           >
-            <RecipeForm />
+            <RecipeForm onCreateRecipe = {createRecipe}/>
           </Popup>
+          <IconButton color="inherit" onClick={() => logout()}>
+            <ExitToAppIcon />
+            Logout
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -222,16 +244,13 @@ export default function Dashboard() {
         </div>
         <Divider />
         <SelectedList ingredientsArray = {ingredientsArray}
-         handleCheckClick = {handleCheckClick} />
+          handleCheckClick = {handleCheckClick} />
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} /> 
         <Container maxWidth="lg" className={classes.container}>
-          <IngredientResults ingredientsArray = {ingredientsArray} recipeList = {recipe}/>
-          {/* <Box pt={4}>
-            <Copyright />
-          </Box> */}
+          <IngredientResults recipeList = {recipes}/>
         </Container>
       </main>
     </div>

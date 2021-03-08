@@ -17,6 +17,12 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckboxList(props) {
   const classes = useStyles();
 
-
-   useEffect(()=> {
+  useEffect(()=> {
     console.log("value of props changed: ", props.checkArray)
   }, [props.checkArray])
 
@@ -127,57 +132,6 @@ export class SelectedList extends React.Component{
         }
       >
         {this.renderIngredients()}
-        </List>
-        </div>
-    )
-  }
-}
-
-export class IngredientResults extends React.Component{
-  constructor(props){
-    super(props);
-    this.state={
-      ingredients: props.ingredientsArray,
-      selectedIndex: 0,
-    }
-  }
-  renderIngredients(){
-    return this.state.ingredients.map(el => {
-      return (<ListItem button 
-        key={el.index}
-        //selected = {this.state.selectedIndex===el.index} 
-        >
-          <div className = "arr" key = {el.index}>
-          {el.chk.map(value=>(value ? 'yeet ' : 'nope '))}
-          </div>
-        </ListItem>)
-    })
-  }
-
-  renderRecipes(){
-    return this.props.recipeList.map((recipe, i) => {
-      return (
-        <ListItem key = {i}>
-          {recipe.recipeName}
-        </ListItem>
-      )
-    })
-  }
-
-  render(){
-    const {classes}=this.props;
-    return(
-      <div>
-      <List
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            Recipes
-          </ListSubheader>
-        }
-      >
-        {this.renderRecipes()}
         </List>
         </div>
     )
