@@ -10,12 +10,11 @@ const RecipeSchema = new mongoose.Schema({
   },
   ingredients:{
     type: Array,
+    required: true,
   },
   procedures: {
-    type: Array,
-  },
-  notes:{
     type: String,
+    required: true,
   },
   reviews:{
     type: Array,
@@ -23,9 +22,6 @@ const RecipeSchema = new mongoose.Schema({
   userName:{
     type: String,
     required: true,
-  },
-  tags:{
-    type: Array,
   },
   createdAt: {
     type: Date,
