@@ -1,13 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { useHistory } from "react-router-dom";
-import Paper from '@material-ui/core/Paper';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import { useForm, Form } from './components/useForm';
+import { useForm } from './components/useForm';
 import Controls from './components/controls/Controls';
 import * as ingredientsArray from "./ingredient/ingredientsArray"
-
-
 
 const initialFieldValues = {
     recipeName: '',
@@ -18,9 +14,17 @@ const initialFieldValues = {
     userName:localStorage.name,
 }
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& .MuiFormControl-root':{ //& is a selector symobl, . is for all classes
+            width: '80%'
+            ,margin: theme.spacing(1)
+        }
+    }
+}))
 
-export default function RecipeForm() {
-    const history = useHistory();
+export default function RecipeForm(props) {
+    const classes = useStyles();
 
     const{
         fieldValues,
@@ -28,27 +32,8 @@ export default function RecipeForm() {
         handleInputChange,
     }=useForm(initialFieldValues)
 
-    const createRecipe = async (info) => {
-        try{
-          await fetch("/dashboard", {
-            method: "POST",
-            body: JSON.stringify(info),
-            headers: {
-              "Content-Type": "application/json",
-            }
-            }).then(res => {
-            if (res.ok) {
-              console.log("Frond-End Post Recipe Success")
-            }
-          })
-        }
-        catch(err){
-          console.log("Front-End Post Recipe Fail");
-        }
-      };
-
     return(
-        <Form onsubmit = {e => createRecipe(fieldValues)}>
+        <form className = {classes.root}>
             <Grid container>
                 <Grid item x4 = {4}>
                     <Controls.Input
@@ -81,15 +66,14 @@ export default function RecipeForm() {
                         <Controls.Button
                         color = "primary"
                         size = "large"
-                        type = "submit"
                         text = "Submit"
-                        onClick = {e => createRecipe(fieldValues)}
+                        onClick = {() => props.onCreateRecipe(fieldValues)}
                         />
                     </div>
                 </Grid>
                 <Grid item x4 = {4}></Grid>
             </Grid>
-        </Form>
+        </form>
 
     )
 }
