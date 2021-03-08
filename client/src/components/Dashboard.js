@@ -145,6 +145,27 @@ export default function Dashboard() {
           setRecipes(data);
       });
   }
+
+  const createRecipe = async (info) => {
+    try{
+      await fetch("/dashboard", {
+        method: "POST",
+        body: JSON.stringify(info),
+        headers: {
+          "Content-Type": "application/json",
+        }
+        }).then(res => {
+        if (res.ok) {
+          console.log("Frond-End Post Recipe Success")
+          setOpenPopup(false);
+          fetchRecipe();
+        }
+      })
+    }
+    catch(err){
+      console.log("Front-End Post Recipe Fail");
+    }
+  };
   
   const logout = () => {
       localStorage.clear();
@@ -201,7 +222,7 @@ export default function Dashboard() {
             openPopup = {openPopup}
             setOpenPopup = {setOpenPopup}
           >
-            <RecipeForm />
+            <RecipeForm onCreateRecipe = {createRecipe}/>
           </Popup>
           <IconButton color="inherit" onClick={() => logout()}>
             <ExitToAppIcon />
