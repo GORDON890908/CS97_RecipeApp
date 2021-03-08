@@ -16,14 +16,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { SelectedList } from './listItems';
-import IngredientResults from './Cards';
+import IngredientsResult from './Cards';
 import Paper from '@material-ui/core/Paper'
 import AddIcon from '@material-ui/icons/Add';
 
 import Popup from './components/Popup'
 import RecipeForm from './Form.js'
 import { Button } from '@material-ui/core';
-
+import Dropdown from './Dropdown';
+import useTable from '../components/components/useTable'
+import TableSample from './TableSample';
 
 function Copyright() {
   return (
@@ -200,7 +202,7 @@ export default function Dashboard() {
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
-          <IconButton
+          {/* <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
@@ -208,7 +210,7 @@ export default function Dashboard() {
             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Welcome, {localStorage.getItem('name')}
           </Typography>
@@ -230,7 +232,7 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer
+      {/* <Drawer
         variant="permanent"
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
@@ -246,12 +248,15 @@ export default function Dashboard() {
         <SelectedList ingredientsArray = {ingredientsArray}
           handleCheckClick = {handleCheckClick} />
         <Divider />
-      </Drawer>
+      </Drawer> */}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} /> 
         <Container maxWidth="lg" className={classes.container}>
-          <IngredientResults recipeList = {recipes}/>
+          <Dropdown recipeList = {recipes} />
+          <TableSample recipeList = {recipes}/>
+          <IngredientsResult recipeList = {recipes}/>
         </Container>
+
       </main>
     </div>
   );
