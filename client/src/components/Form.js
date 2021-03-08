@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import { useHistory } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -9,35 +10,57 @@ import * as ingredientsArray from "./ingredient/ingredientsArray"
 
 
 const initialFieldValues = {
-    id: 0,
-    dishName: '',
-    tags: "",
+    recipeName: '',
+    description: '',
     ingredients: [],
-    steps: "",
+    procedures: '',
+    reviews:[],
+    userName:localStorage.name,
 }
 
 
 export default function RecipeForm() {
+    const history = useHistory();
+
     const{
         fieldValues,
         setFieldValues,
         handleInputChange,
     }=useForm(initialFieldValues)
 
+    const createRecipe = async (info) => {
+        try{
+          await fetch("/dashboard", {
+            method: "POST",
+            body: JSON.stringify(info),
+            headers: {
+              "Content-Type": "application/json",
+            }
+            }).then(res => {
+            if (res.ok) {
+              console.log("Frond-End Post Recipe Success")
+            }
+          })
+        }
+        catch(err){
+          console.log("Front-End Post Recipe Fail");
+        }
+      };
+
     return(
-        <Form>
+        <Form onsubmit = {e => createRecipe(fieldValues)}>
             <Grid container>
                 <Grid item x4 = {4}>
                     <Controls.Input
-                        name = "dishName"
-                        label='Dish Name'
-                        value={fieldValues.dishName}
+                        name = "recipeName"
+                        label='Recipe Name'
+                        value={fieldValues.recipeName}
                         onChange= {handleInputChange}
                     />
                     <Controls.Input
-                        name ="tags"
-                        label='User Tags'
-                        value={fieldValues.tags}
+                        name ="description"
+                        label='Description'
+                        value={fieldValues.description}
                         onChange= {handleInputChange}   
                     />
                     <Controls.Select
@@ -49,22 +72,19 @@ export default function RecipeForm() {
                     
                     />
                     <Controls.Multiline
-                        name = "steps"
+                        name = "procedures"
                         label = "Steps: "
-                        value = {fieldValues.steps}
+                        value = {fieldValues.procedures}
                         onChange = {handleInputChange}
                     />
                     <div>
                         <Controls.Button
                         color = "primary"
                         size = "large"
-                        type = "Submit"
-                        text = "Submit"/>
-                        <Controls.Button
-                        color = "default"
-                        size = "large"
-                        type = "Rest"
-                        text = "Reset"/>
+                        type = "submit"
+                        text = "Submit"
+                        onClick = {e => createRecipe(fieldValues)}
+                        />
                     </div>
                 </Grid>
                 <Grid item x4 = {4}></Grid>
@@ -73,3 +93,11 @@ export default function RecipeForm() {
 
     )
 }
+
+/*
+                        <Controls.Button
+                        color = "default"
+                        size = "large"
+                        type = "Rest"
+                        text = "Reset"/>
+*/

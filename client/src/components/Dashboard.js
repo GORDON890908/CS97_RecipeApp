@@ -231,9 +231,6 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <IngredientResults recipeList = {recipes}/>
         </Container>
-        <button onClick={logout}>
-                Log Out
-        </button>
       </main>
     </div>
   );
