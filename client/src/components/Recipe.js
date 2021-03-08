@@ -20,7 +20,7 @@ function Recipe() {
                     return (
                         <div key = {index}>
                             <p>Recipe {recipe.recipeName}</p>
-                            <p>googleId: {recipe.description}</p>
+                            <p>Description: {recipe.description}</p>
                         </div>
                     )
                 })}
