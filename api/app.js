@@ -47,6 +47,7 @@ app.use(
 
 // Authentication/User
 const { OAuth2Client } = require('google-auth-library')
+const e = require('express')
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 
 // @desc    Check DB if the user exist, if not, add user into the DB
@@ -105,13 +106,27 @@ app.post("/dashboard", async (req, res) => {
 })
 
 app.get("/recipe", (req, res) => {
-  try{
-    Recipe.find({}).then((results => {
-      res.send(results);
-      //console.log(results);
-    }))
-  }catch(err){
-    console.error(err)
+  const url = querystring.parse(req.url);
+  const id = url['/recipe?id'];
+
+  if (typeof url['/recipe?id'] !== 'undefined') {
+    try{
+      Recipe.find({_id: `${id}`}).then((results => {
+        res.send(results);
+        //console.log(results);
+      }))
+    }catch(err){
+      console.error(err)
+    }
+  } else {
+    try{
+      Recipe.find({}).then((results => {
+        res.send(results);
+        //console.log(results);
+      }))
+    }catch(err){
+      console.error(err)
+    }
   }
 })
 
