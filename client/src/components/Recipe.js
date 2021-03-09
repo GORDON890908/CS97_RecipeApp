@@ -3,6 +3,12 @@ import Comment from "./Comment.js"
 function Recipe() {
     const [recipe, setRecipe] = useState(null);
 
+    const [CommentList, setCommentList] = useState([]);
+
+    const updateComment = (newComment) => {
+        console.log(newComment)
+        setCommentList(CommentList.concat(newComment));
+    }
     const fetchRecipe = async () => {
         await fetch(`/recipe${window.location.search}`)
             .then(res => res.json())
@@ -29,7 +35,7 @@ function Recipe() {
                 </ol>
 
             </div>
-            <div style={{ margin: '10px', paddingLeft: '25px' }}><LikeDislikes></LikeDislikes></div>
+            {/* <div style={{ margin: '10px', paddingLeft: '25px' }}><LikeDislikes></LikeDislikes></div> */}
             {/* actions={<LikeDislikes> //recipe recipeId={recipeId} userId={localStorage.getItem('userId')} />} */}
             <Comment CommentList={CommentList} postId={Recipe.id} refreshFunction={updateComment} />
 
