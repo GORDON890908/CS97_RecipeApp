@@ -252,9 +252,9 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} /> 
         <Container maxWidth="lg" className={classes.container}>
-          <Dropdown recipeList = {recipes} />
+          {/* <Dropdown recipeList = {recipes} /> */}
           <TableSample recipeList = {recipes}/>
-          <IngredientsResult recipeList = {recipes}/>
+          {/* //<IngredientsResult recipeList = {recipes}/> */}
         </Container>
 
       </main>
