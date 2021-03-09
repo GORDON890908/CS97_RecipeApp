@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment.js"
 import style from "../css/detailPage.css";
+import LikeDislikes from "./LikeDislike.js"
 
 function Recipe() {
 
@@ -59,7 +60,7 @@ function Recipe() {
                 })}
             </div>
 
-            {/* <div style={{ margin: '10px', paddingLeft: '25px' }}><LikeDislikes></LikeDislikes></div> */}
+            <div style={{ margin: '10px', paddingLeft: '25px' }}><LikeDislikes></LikeDislikes></div>
             {/* actions={<LikeDislikes> //recipe recipeId={recipeId} userId={localStorage.getItem('userId')} />} */}
             <Comment CommentList={CommentList} postId={Recipe.id} refreshFunction={updateComment} />
 
