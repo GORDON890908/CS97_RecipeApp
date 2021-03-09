@@ -52,11 +52,14 @@
   background: white;
   min-width: 40%; 
   position: absolue; 
-  /* left: 50%; */
   width: 30%;
   height: 50%;
   
   /* margin-left: 40%; */
+}
+
+.recipeDetail:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .card {

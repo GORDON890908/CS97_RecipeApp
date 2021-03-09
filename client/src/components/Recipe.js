@@ -48,7 +48,7 @@ function Recipe() {
                         <div key={index} className="recipeDetail">
                             <h2 style={{ margin: "10px" }}>{(recipe.recipeName)} </h2>
                             <p style={{ paddingLeft: "10px" }}>Description: {recipe.description}</p>
-                            <img src="https://v1.nitrocdn.com/KQYMGOLIdXGmoAcyJsPOrQDKktgCbwtG/assets/static/optimized/rev-a960d32/wp-content/uploads/2016/03/Pressure-Cooker-Curry-IV.jpg" alt="apple" width="100%" height="50%" />
+                            {/* <img src="https://v1.nitrocdn.com/KQYMGOLIdXGmoAcyJsPOrQDKktgCbwtG/assets/static/optimized/rev-a960d32/wp-content/uploads/2016/03/Pressure-Cooker-Curry-IV.jpg" alt="apple" width="100%" height="50%" /> */}
                             <ol style={{ margin: "10px" }}>
                                 {(recipe.ingredients.map(ingredient => (
                                     <li>{ingredient}</li>
@@ -60,7 +60,7 @@ function Recipe() {
                 })}
             </div>
 
-            <div style={{ margin: '10px', paddingLeft: '25px' }}><LikeDislikes></LikeDislikes></div>
+            <div style={{ paddingLeft: '450px' }}><LikeDislikes></LikeDislikes></div>
             {/* actions={<LikeDislikes> //recipe recipeId={recipeId} userId={localStorage.getItem('userId')} />} */}
             <Comment CommentList={CommentList} postId={Recipe.id} refreshFunction={updateComment} />
 
