@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Comment from "./Comment.js"
+import style from "../css/detailPage.css";
+
 function Recipe() {
     const [recipe, setRecipe] = useState(null);
 
@@ -21,7 +23,7 @@ function Recipe() {
     return (
         <div>
             <div className="recipeDetail">
-                <h1>title of the recipe`</h1>
+                <h1>recipe.</h1>
                 <img src="https://www.w3schools.com/images/picture.jpg" alt="apple" />
                 <ol>
                     <li>buy apple</li>
