@@ -42,7 +42,7 @@ function Comment(props) {
     return (
         <div>
             <br />
-            <h2>replies</h2>
+            <h2 style={{ paddingLeft: 10 }}>replies</h2>
             <hr />
             {console.log(props.CommentList)}
 
@@ -52,11 +52,10 @@ function Comment(props) {
                     author={variables.writer}
                     postId={variables.postId}
                     refreshFunction={props.refreshFunction} />
-
             ))
             }
 
-            <form style={{ display: 'flex' }} onSubmit={onSubmit}>
+            <form style={{ paddingLeft: "5px", display: 'flex' }} onSubmit={onSubmit}>
                 <TextArea
                     style={{ width: "100%", borderRadius: "5px" }}
                     onChange={handleChange}

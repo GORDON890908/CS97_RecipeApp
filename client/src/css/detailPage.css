@@ -10,9 +10,8 @@
    left: 50%;
    width: 40%;
    margin-left: 40%;
-   
-    /* justify-content: space-around; */
-    /* flex-wrap: wrap; */
+   justify-content: space-around; 
+   flex-wrap: wrap;
 }
 
 /* Create three equal columns that floats next to each other */
@@ -54,7 +53,9 @@
   min-width: 40%; 
   position: absolue; 
   /* left: 50%; */
-  width: 40%;
+  width: 30%;
+  height: 50%;
+  
   /* margin-left: 40%; */
 }
 
@@ -63,6 +64,7 @@
   transition: 0.3s;
   border-radius: 5px; /* 5px rounded corners */
   margin: 20px;
+  
 }
 
 .image {
