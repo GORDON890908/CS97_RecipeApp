@@ -1,12 +1,32 @@
 import React, { useEffect, useState } from "react";
+import {useHistory} from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from '@material-ui/core/IconButton';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Grid from '@material-ui/core/Grid';
+
 import Comment from "./Comment.js"
 import CommentForm from "./CommentForm.js"
-import style from "../css/detailPage.css";
 
 function Recipe() {
     const [recipe, setRecipe] = useState(null);
-    const [comment, setComment] = useState("");
     const [commentList, setCommentList] = useState(null);
+    const history = useHistory();
+
+    const logout = () => {
+        localStorage.clear();
+        history.push("/");
+    }
+
+    const dashboard = () => {
+        history.push("/dashboard");
+    }
 
     const fetchRecipe = async () => {
         await fetch(`/recipe${window.location.search}`)
@@ -31,23 +51,47 @@ function Recipe() {
     }, [])
 
     return (
-
         <div>
+            <AppBar position="static">
+                <Toolbar>
+                    <Grid
+                        justify="space-between" // Add it here :)
+                        container 
+                        spacing={24}
+                    >
+                        <Grid item>
+                            <IconButton color="inherit" onClick={() => dashboard()}>
+                                <HomeIcon />
+                                Dashboard
+                            </IconButton>
+                        </Grid>
+                        <Grid item>
+                        <IconButton color="inherit"  edge="end" onClick={() => logout()}>
+                            <ExitToAppIcon />
+                            Logout
+                        </IconButton>
+                        </Grid>
+                    </Grid>
+                </Toolbar>
+            </AppBar>
             <div>
-                {recipe && recipe.map((recipe, index) => {
-                    return (
-                        <div key={index} className="recipeDetail">
-                            <h2 style={{ margin: "10px" }}>{(recipe.recipeName)} </h2>
-                            <p style={{ paddingLeft: "10px" }}>Description: {recipe.description}</p>
-                            <ol style={{ margin: "10px" }}>
-                                {(recipe.ingredients.map((ingredient, index) => (
-                                    <li key={index}>{ingredient}</li>
-                                )))}
-                            </ol>
-                            <p style={{ margin: "10px" }}>{recipe.procedures}</p>
-                        </div>
-                    )
-                })}
+                {recipe && recipe.map((recipe, index) => (
+                    <Card key={index}>
+                        <CardHeader
+                            title={recipe.recipeName}
+                            subheader={"by " + recipe.userName + ", " + recipe.createdAt.substring(0, 10)}
+                        />
+                        <CardContent>
+                            <Typography variant="body1" component="p">
+                                Ingredients: {recipe.ingredients}
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                Procedures: <br />
+                                {recipe.description}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                ))}
             </div>
             <Comment CommentList={commentList}/>
             <CommentForm />

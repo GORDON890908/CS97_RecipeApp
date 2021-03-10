@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { stringify } = require('querystring')
 
 const RecipeSchema = new mongoose.Schema({
   recipeName: {
@@ -9,6 +10,10 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
   },
   ingredients:{
+    type: String,
+    required: true,
+  },
+  tag:{
     type: Array,
     required: true,
   },

@@ -15,7 +15,7 @@ export default function Select (props) {
             value = {value}
             label = {label}
             onChange = {onChange}
-            multiple = {true}
+            multiple = {false}
             >
                     <MenuItem value="">None</MenuItem>
                     {

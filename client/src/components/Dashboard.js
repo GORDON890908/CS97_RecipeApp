@@ -119,7 +119,6 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
-
   pageContent:{
     margin: theme.spacing(5),
     padding: theme.spacing(3),
@@ -195,6 +194,7 @@ export default function Dashboard() {
     fetchRecipe();
     console.log("index changed!: ")
   }, [ingredientsArray])
+ 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
