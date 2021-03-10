@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
 
-  pageContent:{
+  pageContent: {
     margin: theme.spacing(5),
     padding: theme.spacing(3),
   },
@@ -127,34 +127,34 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [ingredientsArray, setIngredients] = React.useState( [ 
-    {index: 0, name: "Meat", chk: [false, false, false, false]}, {index: 1, name: "Vegetables", chk: [false, false, false, false]},
-    {index: 2, name: "Dairy", chk:[false,false,false,false]}, {index: 3, name: "Carbohydrates", chk: [false, false, false, false]},
-    {index: 4, name: "Seafood", chk: [false, false, false, false]}, {index: 5, name: "Fruits", chk: [false, false, false, false]},
-    {index: 6, name: "Condiments/Spices", chk: [false, false, false, false]}
+  const [ingredientsArray, setIngredients] = React.useState([
+    { index: 0, name: "Meat", chk: [false, false, false, false] }, { index: 1, name: "Vegetables", chk: [false, false, false, false] },
+    { index: 2, name: "Dairy", chk: [false, false, false, false] }, { index: 3, name: "Carbohydrates", chk: [false, false, false, false] },
+    { index: 4, name: "Seafood", chk: [false, false, false, false] }, { index: 5, name: "Fruits", chk: [false, false, false, false] },
+    { index: 6, name: "Condiments/Spices", chk: [false, false, false, false] }
   ])
   const [openPopup, setOpenPopup] = React.useState(false)
 
   const history = useHistory();
   const [recipes, setRecipes] = React.useState([]);
-   
-  const fetchRecipe = async() => {
-      await fetch('/recipe')
+
+  const fetchRecipe = async () => {
+    await fetch('/recipe')
       .then(res => res.json())
       .then(data => {
-          setRecipes(data);
+        setRecipes(data);
       });
   }
 
   const createRecipe = async (info) => {
-    try{
+    try {
       await fetch("/dashboard", {
         method: "POST",
         body: JSON.stringify(info),
         headers: {
           "Content-Type": "application/json",
         }
-        }).then(res => {
+      }).then(res => {
         if (res.ok) {
           console.log("Frond-End Post Recipe Success")
           setOpenPopup(false);
@@ -162,34 +162,34 @@ export default function Dashboard() {
         }
       })
     }
-    catch(err){
+    catch (err) {
       console.log("Front-End Post Recipe Fail");
     }
   };
-  
+
   const logout = () => {
-      localStorage.clear();
-      history.push("/");
+    localStorage.clear();
+    history.push("/");
   }
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
-  const handleCheckClick = (value, array) => () =>{
+
+  const handleCheckClick = (value, array) => () => {
     const ingredients = ingredientsArray
     console.log(ingredients)
     const chkArray = array
     console.log(chkArray)
     chkArray[value] = !(chkArray[value])
-    setIngredients({ingredients})
+    setIngredients({ ingredients })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchRecipe();
     console.log("index changed!: ")
   }, [ingredientsArray])
@@ -212,17 +212,17 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Welcome, {localStorage.getItem('name')}
           </Typography>
-          <Button color = "inherit" 
-          onClick={() =>setOpenPopup(true)}>
+          <Button color="inherit"
+            onClick={() => setOpenPopup(true)}>
             Add User Input Form
-            <AddIcon/>
+            <AddIcon />
           </Button>
           <Popup
-            title = "Recipe Form"
-            openPopup = {openPopup}
-            setOpenPopup = {setOpenPopup}
+            title="Recipe Form"
+            openPopup={openPopup}
+            setOpenPopup={setOpenPopup}
           >
-            <RecipeForm onCreateRecipe = {createRecipe}/>
+            <RecipeForm onCreateRecipe={createRecipe} />
           </Popup>
           <IconButton color="inherit" onClick={() => logout()}>
             <ExitToAppIcon />
@@ -243,14 +243,14 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <SelectedList ingredientsArray = {ingredientsArray}
-          handleCheckClick = {handleCheckClick} />
+        <SelectedList ingredientsArray={ingredientsArray}
+          handleCheckClick={handleCheckClick} />
         <Divider />
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.appBarSpacer} /> 
+        <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <IngredientResults recipeList = {recipes}/>
+          <IngredientResults recipeList={recipes} />
         </Container>
       </main>
     </div>
@@ -271,7 +271,7 @@ function Dashboard() {
     const [user, setUser] = useState(null);
     // Use getItem to get the value stored in localStorage
     const googleId = localStorage.getItem('googleId');
-    
+
     const fetchUser = async() => {
         await fetch(`/user?googleId=${googleId}`)
         .then(res => res.json())
@@ -279,7 +279,7 @@ function Dashboard() {
             setUser(data);
         });
     }
-    
+
     function logout() {
         localStorage.clear();
         history.push("/");
