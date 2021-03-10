@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment.js"
+import CommentForm from "./CommentForm.js"
 import style from "../css/detailPage.css";
 
 function Recipe() {
@@ -14,11 +15,6 @@ function Recipe() {
             setRecipe(data);
             console.log(data)
         });
-    }
-    
-    const updateComment = (newComment) => {
-        console.log(newComment)
-        setCommentList(commentList.concat(newComment));
     }
 
     const fetchComment = async() => {
@@ -54,6 +50,7 @@ function Recipe() {
                 })}
             </div>
             <Comment CommentList={commentList}/>
+            <CommentForm />
         </div >
     );
 }
