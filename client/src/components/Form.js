@@ -3,12 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { useForm } from './components/useForm';
 import Controls from './components/controls/Controls';
-import * as ingredientsArray from "./ingredient/ingredientsArray"
+import MenuItem from '@material-ui/core/MenuItem';
+import * as tagsArray from "./tag/tagsArray.js"
 
 const initialFieldValues = {
     recipeName: '',
     description: '',
-    ingredients: [],
+    ingredients: '',
+    tag: [],
     procedures: '',
     reviews:[],
     userName:localStorage.name,
@@ -35,7 +37,7 @@ export default function RecipeForm(props) {
     return(
         <form className = {classes.root}>
             <Grid container>
-                <Grid item x4 = {4}>
+                <Grid item x5 = {5}>
                     <Controls.Input
                         name = "recipeName"
                         label='Recipe Name'
@@ -48,13 +50,18 @@ export default function RecipeForm(props) {
                         value={fieldValues.description}
                         onChange= {handleInputChange}   
                     />
-                    <Controls.Select
+                    <Controls.Input
                         name = "ingredients"
                         label = "Ingredients Used"
                         value = {fieldValues.ingredients}
                         onChange = {handleInputChange}
-                        options = {ingredientsArray.getIngredientsArray()}
-                    
+                    />
+                    <Controls.Select
+                        name = "tag"
+                        label = "Tag"
+                        value = {fieldValues.tag}
+                        onChange = {handleInputChange}
+                        options = {tagsArray.getTagsArray()}
                     />
                     <Controls.Multiline
                         name = "procedures"
@@ -71,17 +78,10 @@ export default function RecipeForm(props) {
                         />
                     </div>
                 </Grid>
-                <Grid item x4 = {4}></Grid>
+                <Grid item x5 = {5}></Grid>
             </Grid>
         </form>
 
     )
 }
 
-/*
-                        <Controls.Button
-                        color = "default"
-                        size = "large"
-                        type = "Rest"
-                        text = "Reset"/>
-*/
