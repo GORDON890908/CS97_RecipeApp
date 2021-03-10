@@ -78,10 +78,3 @@ export default function RecipeForm(props) {
     )
 }
 
-/*
-                        <Controls.Button
-                        color = "default"
-                        size = "large"
-                        type = "Rest"
-                        text = "Reset"/>
-*/
