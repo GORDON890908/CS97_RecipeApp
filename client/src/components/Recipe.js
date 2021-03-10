@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Typography from '@material-ui/core/Typography';
+
 import Comment from "./Comment.js"
 import CommentForm from "./CommentForm.js"
-import style from "../css/detailPage.css";
+
+const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+    },
+});
 
 function Recipe() {
     const [recipe, setRecipe] = useState(null);
-    const [comment, setComment] = useState("");
     const [commentList, setCommentList] = useState(null);
+    const classes = useStyles();
 
     const fetchRecipe = async () => {
         await fetch(`/recipe${window.location.search}`)
@@ -31,19 +42,25 @@ function Recipe() {
     }, [])
 
     return (
-
         <div>
             <div>
-                {recipe && recipe.map((recipe, index) => {
-                    return (
-                        <div key={index} className="recipeDetail">
-                            <h2 style={{ margin: "10px" }}>{(recipe.recipeName)} </h2>
-                            <p style={{ margin: "10px" }}>Description: {recipe.description}</p>
-                            <p style={{ margin: "10px" }}>Ingredients: {recipe.ingredients}</p>
-                            <p style={{ margin: "10px" }}>Procedures: {recipe.procedures}</p>
-                        </div>
-                    )
-                })}
+                {recipe && recipe.map((recipe, index) => (
+                    <Card className={classes.root} key={index}>
+                        <CardHeader
+                            title={recipe.recipeName}
+                            subheader={"by " + recipe.userName + ", " + recipe.createdAt.substring(0, 10)}
+                        />
+                        <CardContent>
+                            <Typography variant="body1" component="p">
+                                Ingredients: {recipe.ingredients}
+                            </Typography>
+                            <Typography variant="body1" component="p">
+                                Procedures: <br />
+                                {recipe.description}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                ))}
             </div>
             <Comment CommentList={commentList}/>
             <CommentForm />
