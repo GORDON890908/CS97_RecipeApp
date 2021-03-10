@@ -75,17 +75,17 @@ class IngredientResults extends React.Component{
     render(){
         return(
             <div>
-            <List
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-            subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
-                    Recipes
-                </ListSubheader>
-            }
-            >
-                {this.renderRecipes()}
-            </List>
+                <List
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
+                    subheader={
+                        <ListSubheader component="div" id="nested-list-subheader">
+                            Recipes
+                        </ListSubheader>
+                    }
+                >
+                    {this.renderRecipes()}
+                </List>
             </div>
         )
     }

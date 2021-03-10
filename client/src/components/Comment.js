@@ -1,67 +1,36 @@
-import React, { useState } from 'react'
-import { Button, Input } from 'antd';
-import SingleComment from "./SingleComment.js"
-// import axios from 'axios';
-// import { userSelector } from 'react-redux';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
+const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+    },
+});
 
-const { TextArea } = Input;
 
 function Comment(props) {
-    const user = {
-        userId: "1",
-        userName: "Steven",
-    };
-
-    const [Comment, setComment] = useState("");
-
-    const handleChange = (e) => {
-        setComment(e.currentTarget.value)
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-    };
-
-    const variables = {
-        content: Comment,
-        writer: user.userId,
-        postId: props.postId,
-    };
-
-    // axios.post('/api/comment/saveComment', variables).then(response => {
-    //     if (Response.data.success) {
-    //         setComment = "";
-    //         props.refreshFunction(response.data.result);
-    //     }
-    //     else
-    //         alert("post failed");
-    // });
-
-
+    const classes = useStyles();
     return (
         <div>
             <br />
-            <p>replies</p>
+            <h2 style={{ paddingLeft: 10 }}>Comments</h2>
             <hr />
-            {console.log(props.CommentList)}
             {props.CommentList && props.CommentList.map((comment, index) => (
-                <React.Fragment>
-                    <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
-                </React.Fragment>
-
+                <Card className={classes.root} key={index}>
+                    <CardContent>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            {comment.userName} wrote at {comment.createdAt.substring(0, 10)}
+                        </Typography>
+                        <Typography variant="body1" component="p">
+                            {comment.message}
+                        </Typography>
+                    </CardContent>
+                </Card>
             ))}
-            <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                <TextArea
-                    style={{ width: "100%", borderRadius: "5px" }}
-                    onChange={handleChange}
-                    value={Comment}
-                    placeholder="write some comments"
-                />
-                <br />
-                <Button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>Submit</Button>
-            </form>
-        </div>
+        </div >
     )
 }
 export default Comment;
