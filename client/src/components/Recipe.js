@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import {useHistory} from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from '@material-ui/core/IconButton';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Grid from '@material-ui/core/Grid';
 
 import Comment from "./Comment.js"
 import CommentForm from "./CommentForm.js"
 
-const useStyles = makeStyles({
-    root: {
-      minWidth: 275,
-    },
-});
-
 function Recipe() {
     const [recipe, setRecipe] = useState(null);
     const [commentList, setCommentList] = useState(null);
-    const classes = useStyles();
+    const history = useHistory();
+
+    const logout = () => {
+        localStorage.clear();
+        history.push("/");
+    }
+
+    const dashboard = () => {
+        history.push("/dashboard");
+    }
 
     const fetchRecipe = async () => {
         await fetch(`/recipe${window.location.search}`)
@@ -43,9 +52,31 @@ function Recipe() {
 
     return (
         <div>
+            <AppBar position="static">
+                <Toolbar>
+                    <Grid
+                        justify="space-between" // Add it here :)
+                        container 
+                        spacing={24}
+                    >
+                        <Grid item>
+                            <IconButton color="inherit" onClick={() => dashboard()}>
+                                <HomeIcon />
+                                Dashboard
+                            </IconButton>
+                        </Grid>
+                        <Grid item>
+                        <IconButton color="inherit"  edge="end" onClick={() => logout()}>
+                            <ExitToAppIcon />
+                            Logout
+                        </IconButton>
+                        </Grid>
+                    </Grid>
+                </Toolbar>
+            </AppBar>
             <div>
                 {recipe && recipe.map((recipe, index) => (
-                    <Card className={classes.root} key={index}>
+                    <Card key={index}>
                         <CardHeader
                             title={recipe.recipeName}
                             subheader={"by " + recipe.userName + ", " + recipe.createdAt.substring(0, 10)}
