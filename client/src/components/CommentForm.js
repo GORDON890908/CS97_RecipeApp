@@ -19,8 +19,30 @@ class CommentForm extends React.Component {
         return { comment: ''};
     }
 
-    submit = () => {
+    submit = async() => {
         console.log(this.state.comment)
+        const info = {
+            userName: localStorage.name,
+            message: this.state.comment,
+            recipeID: window.location.search.substring(4),
+        }
+        try{
+            await fetch("/comment", {
+                method: "POST",
+                body: JSON.stringify(info),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+                })
+                .then(res => {
+                    if (res.ok) {
+                        window.location.reload()
+                        console.log("Comment Success")
+                }
+            })
+        }catch(err){
+            console.log("Comment Fail");
+        }
         this.setState(this.getDefaultState())
     }
 
