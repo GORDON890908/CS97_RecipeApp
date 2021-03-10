@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     },
 });
 
+
 function Comment(props) {
     const classes = useStyles();
     return (
@@ -17,17 +18,15 @@ function Comment(props) {
             <br />
             <h2 style={{ paddingLeft: 10 }}>Comments</h2>
             <hr />
-            {console.log(props.CommentList)}
-
             {props.CommentList && props.CommentList.map((comment, index) => (
                 <Card className={classes.root} key={index}>
                     <CardContent>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        {comment.userName} wrote at {comment.createdAt.substring(0, 10)}
-                    </Typography>
-                    <Typography variant="body1" component="p">
-                        {comment.message}
-                    </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            {comment.userName} wrote at {comment.createdAt.substring(0, 10)}
+                        </Typography>
+                        <Typography variant="body1" component="p">
+                            {comment.message}
+                        </Typography>
                     </CardContent>
                 </Card>
             ))}
