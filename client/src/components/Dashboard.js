@@ -16,7 +16,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { SelectedList } from './listItems';
-import IngredientsResult from './Cards';
 import Paper from '@material-ui/core/Paper'
 import AddIcon from '@material-ui/icons/Add';
 
