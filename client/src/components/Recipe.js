@@ -83,11 +83,13 @@ function Recipe() {
                         />
                         <CardContent>
                             <Typography variant="body1" component="p">
-                                Ingredients: {recipe.ingredients}
+                                <h5>Ingredients:</h5>
+                                {recipe.ingredients}
                             </Typography>
-                            <Typography variant="body1" component="p">
-                                Procedures: <br />
-                                {recipe.procedures}
+                            <br />
+                            <Typography variant="body1" component="p" style={{ whiteSpace: "pre-line" }}>
+                                <h5>Procedures:</h5> 
+                                {recipe.procedures.split("<br/>").join("\n")}
                             </Typography>
                         </CardContent>
                     </Card>
