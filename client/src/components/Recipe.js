@@ -38,13 +38,9 @@ function Recipe() {
                     return (
                         <div key={index} className="recipeDetail">
                             <h2 style={{ margin: "10px" }}>{(recipe.recipeName)} </h2>
-                            <p style={{ paddingLeft: "10px" }}>Description: {recipe.description}</p>
-                            <ol style={{ margin: "10px" }}>
-                                {(recipe.ingredients.map((ingredient, index) => (
-                                    <li key={index}>{ingredient}</li>
-                                )))}
-                            </ol>
-                            <p style={{ margin: "10px" }}>{recipe.procedures}</p>
+                            <p style={{ margin: "10px" }}>Description: {recipe.description}</p>
+                            <p style={{ margin: "10px" }}>Ingredients: {recipe.ingredients}</p>
+                            <p style={{ margin: "10px" }}>Procedures: {recipe.procedures}</p>
                         </div>
                     )
                 })}
