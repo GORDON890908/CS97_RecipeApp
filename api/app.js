@@ -12,6 +12,7 @@ const querystring = require('querystring')
 const connectDB = require('./config/db')
 const User = require('./models/User')
 const Recipe = require('./models/Recipe')
+const Comment = require('./models/Comment')
 
 // Load config
 dotenv.config({ path: './config/config.env' })
@@ -111,7 +112,7 @@ app.get("/recipe", (req, res) => {
 
   if (typeof url['/recipe?id'] !== 'undefined') {
     try{
-      Recipe.find({_id: `${id}`}).then((results => {
+      Recipe.find({_id: `${id}`}).sort({ _id: -1 }).then((results => {
         res.send(results);
         //console.log(results);
       }))
@@ -120,13 +121,38 @@ app.get("/recipe", (req, res) => {
     }
   } else {
     try{
-      Recipe.find({}).then((results => {
+      Recipe.find({}).sort({ _id: -1 }).then((results => {
         res.send(results);
         //console.log(results);
       }))
     }catch(err){
       console.error(err)
     }
+  }
+})
+
+app.post("/comment", (req, res) => {
+  try{
+    Comment.create(req.body)
+      .then(data => {
+        res.json(data);
+        console.log("Comment Successfully Posted");
+      })
+  }catch(err){
+    console.error(err)
+  }
+})
+
+app.get("/comment", (req, res) => {
+  const url = querystring.parse(req.url);
+  const id = url['/comment?id'];
+
+  try{
+    Comment.find({recipeID: `${id}`}).sort({ _id: -1 }).then((results => {
+      res.send(results);
+    }))
+  }catch(err){
+    console.error(err)
   }
 })
 

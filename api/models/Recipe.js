@@ -16,9 +16,6 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reviews:{
-    type: Array,
-  },
   userName:{
     type: String,
     required: true,
