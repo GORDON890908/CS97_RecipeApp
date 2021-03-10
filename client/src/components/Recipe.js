@@ -56,8 +56,8 @@ function Recipe() {
                 <Toolbar>
                     <Grid
                         justify="space-between" // Add it here :)
-                        container 
-                        spacing={24}
+                        container
+                        spacing={10}
                     >
                         <Grid item>
                             <IconButton color="inherit" onClick={() => dashboard()}>
@@ -87,7 +87,7 @@ function Recipe() {
                             </Typography>
                             <Typography variant="body1" component="p">
                                 Procedures: <br />
-                                {recipe.description}
+                                {recipe.procedures}
                             </Typography>
                         </CardContent>
                     </Card>
