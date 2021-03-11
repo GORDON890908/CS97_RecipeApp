@@ -1,4 +1,4 @@
-### Recipe App for COM SCI 97 Final Project
+# Recipe App for COM SCI 97 Final Project
 
 This is a full stack project.  
 The frontend was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and [Material-UI](https://github.com/mui-org/material-ui).  
