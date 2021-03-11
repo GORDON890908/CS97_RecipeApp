@@ -1,8 +1,7 @@
 import React from 'react'
 import { makeStyles, } from '@material-ui/core/styles';
-import {FormControl, InputLabel, Select as MuiSelect, MenuItem, TextField}  from '@material-ui/core'
+import {Select as MuiSelect, MenuItem, TextField}  from '@material-ui/core'
 import { useForm } from './components/useForm';
-import Controls from './components/controls/Controls';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
@@ -37,32 +36,6 @@ export default function Dropdown(props){
         handleInputChange,
     }=useForm(initialFieldValues)
 
-
-    // return(
-    //     <form className = {classes.root}>
-    //     <FormControl
-    //     variant="outlined"
-    //     >
-    //         <InputLabel>Get Ingredients: </InputLabel>
-    //         <MuiSelect
-    //         name = "ingredients"
-    //         value = {fieldValues.ingredients}
-    //         label = "Get Ingredients:"
-    //         onChange = {handleInputChange}
-    //         multiple = {true}
-    //         >
-    //                 <MenuItem value="">None</MenuItem>
-    //                 {
-    //                     options.map(
-    //                         item => (<MenuItem key = {item._id} value = {item._id}> {item.ingredients}</MenuItem>)
-    //                     )
-    //                 }
-    //         </MuiSelect>
-    //     </FormControl>
-    //     </form>
-
-    // )
-    //change back to ingredients rather than recipeName TODO
     return (
         <div className={classes.root}>
           <Autocomplete
@@ -70,7 +43,6 @@ export default function Dropdown(props){
             id="tags-standard"
             options={options}
             getOptionLabel={(option) => option.recipeName}
-            //defaultValue={[top100Films[13]]}
             renderInput={(params) => (
               <TextField
                 {...params}

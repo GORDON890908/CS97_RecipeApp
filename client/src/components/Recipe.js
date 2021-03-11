@@ -89,7 +89,7 @@ function Recipe() {
                                 {recipe.ingredients}
                             </Typography>
                             <br />
-                            <Typography variant="body1" component="p">
+                            <Typography variant="h5" component="p">
                                 Procedures:
                             </Typography>
                             <Typography variant="body1" component="p" style={{ whiteSpace: "pre-line" }}>
