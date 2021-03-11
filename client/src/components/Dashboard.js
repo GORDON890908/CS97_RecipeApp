@@ -224,20 +224,10 @@ export default function Dashboard() {
             Welcome, {localStorage.getItem('name')}
           </Typography>
           <Controls.Input
-<<<<<<< HEAD
-          name = "Ingredients"
-          label = "die"
-          value = {recipes.ingredients}
-          onChange = {handleInputChange}
-          >
-            
-
-=======
           name = "Search"
           value = {searchValue}
           onChange = {handleSearchChange}
           >
->>>>>>> 4f70be3c063189d866b94de878b9546bf117f271
           </Controls.Input>
           <Button color = "inherit" 
           onClick={() =>setOpenPopup(true)}>
