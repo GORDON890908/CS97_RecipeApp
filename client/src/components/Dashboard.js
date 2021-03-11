@@ -8,7 +8,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add';
 import { Button, TextField } from '@material-ui/core';
@@ -16,19 +15,6 @@ import TableSample from './TableSample';
 
 import Popup from './components/Popup'
 import RecipeForm from './Form.js'
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -129,7 +115,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
   const [ingredientsArray, setIngredients] = React.useState( [ 
     {index: 0, name: "Meat", chk: [false, false, false, false]}, {index: 1, name: "Vegetables", chk: [false, false, false, false]},
     {index: 2, name: "Dairy", chk:[false,false,false,false]}, {index: 3, name: "Carbohydrates", chk: [false, false, false, false]},
