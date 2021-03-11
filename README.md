@@ -2,7 +2,7 @@
 
 This is a full stack project.  
 The frontend was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and [Material-UI](https://github.com/mui-org/material-ui).  
-The backend is created with [Node.js](https://github.com/nodejs/node) and [Express.js](https://github.com/expressjs/express)
+The backend is created with [Node.js](https://github.com/nodejs/node) and [Express.js](https://github.com/expressjs/express)  
 The database we are using is [MongoDB](https://github.com/mongodb/mongo).  
   
 ## Setup
