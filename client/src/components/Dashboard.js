@@ -25,6 +25,8 @@ import { Button } from '@material-ui/core';
 import Dropdown from './Dropdown';
 import useTable from '../components/components/useTable'
 import TableSample from './TableSample';
+import Controls from './components/controls/Controls';
+import { useForm } from './components/useForm';
 
 function Copyright() {
   return (
@@ -122,6 +124,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(5),
     padding: theme.spacing(3),
   },
+
 }));
 
 export default function Dashboard() {
@@ -137,6 +140,13 @@ export default function Dashboard() {
 
   const history = useHistory();
   const [recipes, setRecipes] = React.useState([]);
+  const [searchValue, setSearchValue] = React.useState("");
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+    console.log(searchValue);
+  }
+
    
   const fetchRecipe = async() => {
       await fetch('/recipe')
@@ -213,6 +223,12 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Welcome, {localStorage.getItem('name')}
           </Typography>
+          <Controls.Input
+          name = "Search"
+          value = {searchValue}
+          onChange = {handleSearchChange}
+          >
+          </Controls.Input>
           <Button color = "inherit" 
           onClick={() =>setOpenPopup(true)}>
             Add User Input Form
@@ -252,7 +268,7 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} /> 
         <Container maxWidth="lg" className={classes.container}>
           {/* <Dropdown recipeList = {recipes} /> */}
-          <TableSample recipeList = {recipes}/>
+          <TableSample recipeList = {recipes} search = {searchValue}/>
           {/* //<IngredientsResult recipeList = {recipes}/> */}
         </Container>
 
@@ -263,14 +279,11 @@ export default function Dashboard() {
 
 /*import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-
 import Upload from './Upload.js';
-
 // The Header creates links that can be used to navigate
 // between routes.
 function Dashboard() {
     const history = useHistory();
-
     // Update user after query
     const [user, setUser] = useState(null);
     // Use getItem to get the value stored in localStorage
@@ -288,7 +301,6 @@ function Dashboard() {
         localStorage.clear();
         history.push("/");
     }
-
     return (
         <div>
             <div>

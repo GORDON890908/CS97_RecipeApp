@@ -8,6 +8,7 @@ import { Search } from '@material-ui/icons';
 import * as tagsArray from "./tag/tagsArray.js"
 
 const useStyles = makeStyles(theme =>({
+
     table: {
         marginTop: theme.spacing(3),
         '& tbody td':{
@@ -28,6 +29,12 @@ const useStyles = makeStyles(theme =>({
     searchContainer:{
         display: 'flex',
         
+    },
+    select: {
+        '& .MuiSelect-root':{ //& is a selector symobl, . is for all classes
+            width: '200px',
+            margin: theme.spacing(1)
+        }
     }
 }))
 
@@ -37,7 +44,6 @@ export function TableSample(props){
     const [ingredients, setIngredients] = React.useState(props.recipeList)
     const [filter, setFilter] = React.useState("")
     const handleSearchChange = e => {
-        
         console.log(e.target.textContent)
         setFilter(e.target.textContent)
         console.log(filter)
@@ -53,11 +59,11 @@ export function TableSample(props){
         <Paper className = {classes.pageContent}>
             <Toolbar>
                 <Controls.Select
-                    name= "Tags"
+                    name = "Tags"
                     label = "Search Tags"
-                    value = {props.Tags}
-                    options = {tagsArray.getTagsArray()}
-                    className = {classes.root}
+                    value = {props.tag}
+                    options= {tagsArray.getTagsArray()}
+                    className = {classes.select}
                     InputProps = {{
                         startAdornment: (<InputAdornment position="start">
                             <Search />
@@ -74,7 +80,8 @@ export function TableSample(props){
                     alignItems="flex-start"
             >
                 {props.recipeList.map((recipe, i) => (
-                        JSON.stringify(recipe.tag).toLowerCase().includes(filter) &&
+                        JSON.stringify(recipe.tag).toLowerCase().includes(filter) && 
+                        JSON.stringify(recipe.recipeName).toLowerCase().includes(props.search) &&
                         <Grid item xs={12} sm={6} key={i}>
                             <Card>
                                 <CardHeader
