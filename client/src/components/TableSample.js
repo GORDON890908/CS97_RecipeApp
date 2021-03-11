@@ -1,12 +1,10 @@
 import React from 'react'
 import { withRouter } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
-import {Paper, makeStyles, createGenerateClassName, TableBody, TableRow, TableCell, Card, CardHeader, CardContent, Typography, Button, CardActions, InputAdornment, Toolbar, TextField} from '@material-ui/core'
+import {Paper, makeStyles, Card, CardHeader, CardContent, Typography, Button, CardActions, InputAdornment, Toolbar } from '@material-ui/core'
 import useTable from '../components/components/useTable'
 import Controls from './components/controls/Controls';
 import { Search } from '@material-ui/icons';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
 
 const useStyles = makeStyles(theme =>({
 
@@ -51,7 +49,7 @@ export function TableSample(props){
         <Paper className = {classes.pageContent}>
             <Toolbar>
                 <Controls.Input
-                    label = "Search Ingredients"
+                    label = "Search Recipes"
                     className = {classes.searchInput}
                     InputProps = {{
                         startAdornment: (<InputAdornment position="start">
@@ -59,24 +57,7 @@ export function TableSample(props){
                         </InputAdornment>)
                     }}
                     onChange = {handleChange}
-                />   
-                {/* <Autocomplete
-                    
-                    id="tags-standard"
-                    className = {classes.searchInput}
-                    options={props.recipeList}
-                    getOptionLabel={(option) => option.recipeName}
-                    onChange = {handleSearchChange}
-                    //defaultValue={[top100Films[13]]}
-                    renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        variant="standard"
-                        label="Find Recipes with Selected Ingredients!"
-                        placeholder="Select an Ingredient:"
-                    />
-                    )}
-                /> */}
+                />
             </Toolbar>
             <Grid
                     container
@@ -97,8 +78,9 @@ export function TableSample(props){
                                     <Typography variant="body2" color="textSecondary" component="p">
                                         {recipe.description}
                                     </Typography>
+                                    <br/>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {recipe._id}
+                                        {" Tag: " + recipe.tag}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
@@ -110,50 +92,6 @@ export function TableSample(props){
                         </Grid>
                     ))}
             </Grid>
-            {/* <TblContainer>
-                <TableBody>
-                <Grid
-                    container
-                    spacing={2}
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="flex-start"
-                >
-                    {
-                        props.recipeList.map((item,i) =>(
-                            <Grid item xs={12} sm={6} key={i}>
-                            <TableRow key = {item._id}>
-                                <TableCell>
-                                <Card>
-                                    <CardHeader
-                                        title={item.recipeName}
-                                        subheader={(item.createdAt).substring(0, 10)}
-                                    />
-                                    <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        {item.description}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        {item._id}
-                                    </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                    <Button onClick={() => {console.log(item._id); props.history.push(`/Recipe?id=${item._id}`)}} size="small">
-                                        Learn More
-                                    </Button>
-                                </CardActions>
-                                </Card>
-
-
-                                </TableCell>
-                            </TableRow>
-                            </Grid>
-                        ))
-                    }
-                    </Grid>
-                </TableBody>
-            </TblContainer>
-            <TblPagination/> */}
         </Paper>
     )
 
