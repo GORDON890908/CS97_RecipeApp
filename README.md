@@ -8,7 +8,7 @@ The database we are using is [MongoDB](https://github.com/mongodb/mongo).
 Before running the project, we need to update the config file in the backend.  
 1. Go to `/api/config` and create a file config.env
 ```
-cd api\config   
+cd api/config   
 touch config.env   
 ```
 2. Make according changes to the file to connect your own database and google_oauth20 client_id/secret:  
