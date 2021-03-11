@@ -21,12 +21,14 @@ import AddIcon from '@material-ui/icons/Add';
 
 import Popup from './components/Popup'
 import RecipeForm from './Form.js'
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import Dropdown from './Dropdown';
 import useTable from '../components/components/useTable'
 import TableSample from './TableSample';
 import Controls from './components/controls/Controls';
 import { useForm } from './components/useForm';
+import { blue } from '@material-ui/core/colors';
+import { Palette } from '@material-ui/icons';
 
 function Copyright() {
   return (
@@ -79,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
   title: {
+    maxWidth: '20%',
     flexGrow: 1,
   },
   drawerPaper: {
@@ -120,6 +123,16 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  searchBar:{
+    background: theme.palette.secondary,
+    margin: 'auto',
+    width: '50%',
+    height: '50%',
+    align: 'center',
+  },
+  inputText: {
+    color: '#e3f2fd',
+  },
   pageContent:{
     margin: theme.spacing(5),
     padding: theme.spacing(3),
@@ -143,7 +156,7 @@ export default function Dashboard() {
   const [searchValue, setSearchValue] = React.useState("");
 
   const handleSearchChange = (e) => {
-    setSearchValue(e.target.value);
+    setSearchValue((e.target.value).toLowerCase());
     console.log(searchValue);
   }
 
@@ -211,24 +224,20 @@ export default function Dashboard() {
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar)}>
         <Toolbar className={classes.toolbar}>
-          {/* <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Welcome, {localStorage.getItem('name')}
           </Typography>
-          <Controls.Input
+          <TextField
+          placeholder = "Enter Recipe Name here:"
+
+          variant ="filled"
+          className = {classes.searchBar}
           name = "Search"
           value = {searchValue}
           onChange = {handleSearchChange}
+          InputProps={{className: classes.inputText}}
           >
-          </Controls.Input>
+          </TextField>
           <Button color = "inherit" 
           onClick={() =>setOpenPopup(true)}>
             Add User Input Form
@@ -241,7 +250,8 @@ export default function Dashboard() {
           >
             <RecipeForm onCreateRecipe = {createRecipe}/>
           </Popup>
-          <IconButton color="inherit" onClick={() => logout()}>
+          <IconButton color="inherit" onClick={() => logout()}
+          >
             <ExitToAppIcon />
             Logout
           </IconButton>

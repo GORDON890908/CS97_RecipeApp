@@ -24,14 +24,15 @@ const useStyles = makeStyles(theme =>({
         }
     },
     searchInput:{
-        width: '75%'
+        width: '75%',
+        margin: theme.spacing(1)
     },
     searchContainer:{
         display: 'flex',
         
     },
     select: {
-        '& .MuiSelect-root':{ //& is a selector symobl, . is for all classes
+        '& .MuiFormControl-root':{ //& is a selector symobl, . is for all classes
             width: '200px',
             margin: theme.spacing(1)
         }
