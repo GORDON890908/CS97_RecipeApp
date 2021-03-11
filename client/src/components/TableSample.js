@@ -5,6 +5,7 @@ import {Paper, makeStyles, Card, CardHeader, CardContent, Typography, Button, Ca
 import useTable from '../components/components/useTable'
 import Controls from './components/controls/Controls';
 import { Search } from '@material-ui/icons';
+import * as tagsArray from "./tag/tagsArray.js"
 
 const useStyles = makeStyles(theme =>({
 
@@ -16,14 +17,25 @@ const useStyles = makeStyles(theme =>({
     },
     pageContent:{
         margin: theme.spacing(5),
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        '& .MuiFormControl-root':{ //& is a selector symobl, . is for all classes
+            width: '15%'
+            ,margin: theme.spacing(1)
+        }
     },
     searchInput:{
-        width: '75%'
+        width: '75%',
+        margin: theme.spacing(1)
     },
     searchContainer:{
         display: 'flex',
         
+    },
+    select: {
+        '& .MuiFormControl-root':{ //& is a selector symobl, . is for all classes
+            width: '200px',
+            margin: theme.spacing(1)
+        }
     }
 }))
 
@@ -33,14 +45,13 @@ export function TableSample(props){
     const [ingredients, setIngredients] = React.useState(props.recipeList)
     const [filter, setFilter] = React.useState("")
     const handleSearchChange = e => {
-        
         console.log(e.target.textContent)
         setFilter(e.target.textContent)
         console.log(filter)
     }
     const handleChange = (e) => {
         console.log(e.target.value)
-        setFilter(e.target.value)
+        setFilter((e.target.value).toLowerCase())
     }
     const{
         TblContainer, TblPagination, recordsAfterPagingAndSorting
@@ -48,9 +59,12 @@ export function TableSample(props){
     return(
         <Paper className = {classes.pageContent}>
             <Toolbar>
-                <Controls.Input
-                    label = "Search Recipes"
-                    className = {classes.searchInput}
+                <Controls.Select
+                    name = "Tags"
+                    label = "Search Tags"
+                    value = {props.tag}
+                    options= {tagsArray.getTagsArray()}
+                    className = {classes.select}
                     InputProps = {{
                         startAdornment: (<InputAdornment position="start">
                             <Search />
@@ -67,7 +81,8 @@ export function TableSample(props){
                     alignItems="flex-start"
             >
                 {props.recipeList.map((recipe, i) => (
-                        recipe.recipeName.toLowerCase().includes(filter) &&
+                        JSON.stringify(recipe.tag).toLowerCase().includes(filter) && 
+                        JSON.stringify(recipe.recipeName).toLowerCase().includes(props.search) &&
                         <Grid item xs={12} sm={6} key={i}>
                             <Card>
                                 <CardHeader

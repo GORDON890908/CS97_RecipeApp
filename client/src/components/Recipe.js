@@ -82,13 +82,17 @@ function Recipe() {
                             subheader={"by " + recipe.userName + ", " + recipe.createdAt.substring(0, 10)}
                         />
                         <CardContent>
+                            <Typography variant="h5" component="p">
+                                Ingredients:
+                            </Typography>
                             <Typography variant="body1" component="p">
-                                <h5>Ingredients:</h5>
                                 {recipe.ingredients}
                             </Typography>
                             <br />
+                            <Typography variant="h5" component="p">
+                                Procedures:
+                            </Typography>
                             <Typography variant="body1" component="p" style={{ whiteSpace: "pre-line" }}>
-                                <h5>Procedures:</h5> 
                                 {recipe.procedures.split("<br/>").join("\n")}
                             </Typography>
                         </CardContent>
