@@ -17,11 +17,14 @@ const useStyles = makeStyles(theme =>({
     },
     pageContent:{
         margin: theme.spacing(5),
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        '& .MuiFormControl-root':{ //& is a selector symobl, . is for all classes
+            width: '15%'
+            ,margin: theme.spacing(1)
+        }
     },
     searchInput:{
-        minWidth: '200px',
-        width: '100%'
+        width: '75%'
     },
     searchContainer:{
         display: 'flex',
@@ -29,8 +32,8 @@ const useStyles = makeStyles(theme =>({
     },
     select: {
         '& .MuiSelect-root':{ //& is a selector symobl, . is for all classes
-            width: '200px'
-            ,margin: theme.spacing(1)
+            width: '200px',
+            margin: theme.spacing(1)
         }
     }
 }))
@@ -41,7 +44,6 @@ export function TableSample(props){
     const [ingredients, setIngredients] = React.useState(props.recipeList)
     const [filter, setFilter] = React.useState("")
     const handleSearchChange = e => {
-        
         console.log(e.target.textContent)
         setFilter(e.target.textContent)
         console.log(filter)
@@ -78,7 +80,8 @@ export function TableSample(props){
                     alignItems="flex-start"
             >
                 {props.recipeList.map((recipe, i) => (
-                        JSON.stringify(recipe.tag).toLowerCase().includes(filter) &&
+                        JSON.stringify(recipe.tag).toLowerCase().includes(filter) && 
+                        JSON.stringify(recipe.recipeName).toLowerCase().includes(props.search) &&
                         <Grid item xs={12} sm={6} key={i}>
                             <Card>
                                 <CardHeader
