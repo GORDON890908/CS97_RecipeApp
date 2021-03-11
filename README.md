@@ -42,7 +42,7 @@ npm i
 npm run start  
 ```
 
-The project should be located at [localhost:3000](http://localhost:3000/).
+The project should be located at [localhost](http://localhost:3000/).
 
 ## Things of Note
 
