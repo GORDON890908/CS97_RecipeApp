@@ -16,7 +16,11 @@ const useStyles = makeStyles(theme =>({
     },
     pageContent:{
         margin: theme.spacing(5),
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        '& .MuiFormControl-root':{ //& is a selector symobl, . is for all classes
+            width: '15%'
+            ,margin: theme.spacing(1)
+        }
     },
     searchInput:{
         width: '75%'
