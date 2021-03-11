@@ -11,7 +11,7 @@ Before running the project, we need to update the config file in the backend.
 cd api\config   
 touch config.env   
 ```
-2. make according changes to the file to connect your own database and google_oauth20 client_id/secret:  
+2. Make according changes to the file to connect your own database and google_oauth20 client_id/secret:  
 ```
 PORT = 9000   
 MONGO_URI = xxxxxx   
@@ -19,24 +19,24 @@ GOOGLE_CLIENT_ID = xxxxxx
 GOOGLE_CLIENT_SECRET = xxxxxx   
 ```
 
-To run api (backend of the project):  
+## API (backend)
 1. Go to `/api` folder and install the packages needed   
 ```
 cd api  
 npm i   
 ```
-2. To start the backend
+2. To start the api
 ```
 npm run dev  
 ```
 
-To run client (frontend of the project):  
+## Client (frontend)
 1. Go to `/client` folder and install the packages needed   
 ```
 cd client  
 npm i   
 ```
-2. To start the frontend
+2. To start the client
 ```
 npm run start  
 ```
