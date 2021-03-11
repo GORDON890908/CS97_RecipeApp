@@ -1,10 +1,11 @@
-## Recipe App for COM SCI 97 Final Project
+### Recipe App for COM SCI 97 Final Project
 
 This is a full stack project.  
 The frontend was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and [Material-UI](https://github.com/mui-org/material-ui).  
 The backend is created with [Node.js](https://github.com/nodejs/node) and [Express.js](https://github.com/expressjs/express)
 The database we are using is [MongoDB](https://github.com/mongodb/mongo).  
   
+## Setup
 Before running the project, we need to update the config file in the backend.  
 1. Go to `/api/config` and create a file config.env
 ```
@@ -19,7 +20,7 @@ GOOGLE_CLIENT_ID = xxxxxx
 GOOGLE_CLIENT_SECRET = xxxxxx   
 ```
 
-## API (backend)
+### For api (Backend)
 1. Go to `/api` folder and install the packages needed   
 ```
 cd api  
@@ -30,7 +31,7 @@ npm i
 npm run dev  
 ```
 
-## Client (frontend)
+### For Client (Frontend)
 1. Go to `/client` folder and install the packages needed   
 ```
 cd client  
