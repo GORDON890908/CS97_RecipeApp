@@ -47,3 +47,7 @@ The project should be located at [localhost](http://localhost:3000/).
 ## Things of Note
 
 - feel free to fork and adjust to your needs/wants
+
+## Demo Video
+[Youtube](https://www.youtube.com/watch?v=NfoLUNmaS2A)
+[Google Drive](https://drive.google.com/file/d/1m9Dy2YriBvpb-BqFnoVn-HZcDMALy2iq/view?usp=sharing)
