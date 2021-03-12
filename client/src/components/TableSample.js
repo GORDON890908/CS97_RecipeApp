@@ -61,7 +61,7 @@ export function TableSample(props){
             <Toolbar>
                 <Controls.Select
                     name = "Tags"
-                    label = "Search Tags"
+                    label = "Tags"
                     value = {props.tag}
                     options= {tagsArray.getTagsArray()}
                     className = {classes.select}
@@ -82,7 +82,8 @@ export function TableSample(props){
             >
                 {props.recipeList.map((recipe, i) => (
                         JSON.stringify(recipe.tag).toLowerCase().includes(filter) && 
-                        JSON.stringify(recipe.recipeName).toLowerCase().includes(props.search) &&
+                        (JSON.stringify(recipe.recipeName).toLowerCase().includes(props.search) ||
+                        JSON.stringify(recipe.userName).toLowerCase().includes(props.search)) &&
                         <Grid item xs={12} sm={6} key={i}>
                             <Card>
                                 <CardHeader
