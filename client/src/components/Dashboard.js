@@ -181,7 +181,7 @@ export default function Dashboard() {
             Welcome, {localStorage.getItem('name')}
           </Typography>
           <TextField
-          placeholder = "Enter Recipe Name here:"
+          placeholder = "Search Recipe or User Name:"
 
           variant ="filled"
           className = {classes.searchBar}
