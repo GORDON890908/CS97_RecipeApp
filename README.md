@@ -12,7 +12,7 @@ Before running the project, we need to update the config file in the backend.
 cd api/config   
 touch config.env   
 ```
-2. Make according changes to the file to connect your own database and google_oauth20 client_id/secret:  
+2. Make according changes to config.env to connect your own database and google_oauth20 client_id/secret:  
 ```
 PORT = 9000   
 MONGO_URI = xxxxxx   
